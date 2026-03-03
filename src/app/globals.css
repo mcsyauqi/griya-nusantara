@@ -1,26 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap');
+
 @import "tailwindcss";
 
+/* ===== Design Tokens ===== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-dark: #1C1410;
+  --accent-gold: #C4956A;
+  --surface-mahogany: #2A1F18;
+  --text-cream: #F4EDE4;
+  --muted-bronze: #8B7355;
+  --green-accent: #4A6741;
+  --bg-cream: #F4EDE4;
+
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
 }
 
+/* ===== Tailwind Theme ===== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg-dark: #1C1410;
+  --color-accent-gold: #C4956A;
+  --color-surface-mahogany: #2A1F18;
+  --color-text-cream: #F4EDE4;
+  --color-muted-bronze: #8B7355;
+  --color-green-accent: #4A6741;
+  --color-bg-cream: #F4EDE4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===== Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-cream);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ===== Typography ===== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+/* ===== Keyframe Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0.3;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes diamondPulse {
+  0%, 100% { transform: rotate(45deg) scale(1); }
+  50% { transform: rotate(45deg) scale(1.15); }
+}
+
+@keyframes floatBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes widthExpand {
+  from { width: 0; }
+  to { width: 60px; }
+}
+
+/* ===== Animation Classes ===== */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out both;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.5s ease-out both;
+}
+
+.animate-diamond-pulse {
+  animation: diamondPulse 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: floatBounce 3s ease-in-out infinite;
+}
+
+/* ===== Decorative Batik Pattern ===== */
+.batik-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 0;
+}
+
+.batik-divider::before,
+.batik-divider::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: var(--accent-gold);
+}
+
+.batik-diamond {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--accent-gold);
+  transform: rotate(45deg);
+  position: relative;
+}
+
+.batik-diamond::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1px solid var(--accent-gold);
+}
+
+/* ===== Geometric Heritage Border ===== */
+.heritage-border {
+  position: relative;
+  padding: 2px;
+}
+
+.heritage-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--accent-gold);
+  opacity: 0.3;
+}
+
+.heritage-border::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--accent-gold);
+  opacity: 0.15;
+}
+
+/* ===== Card Hover Effects ===== */
+.card-hover {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Image Hover Zoom ===== */
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  transition: transform 0.7s ease;
+}
+
+.img-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* ===== Smooth Section Transitions ===== */
+.section-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Form Styling ===== */
+.form-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--muted-bronze);
+  padding: 14px 0;
+  color: var(--text-cream);
+  font-family: var(--font-body);
+  font-size: 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-input::placeholder {
+  color: var(--muted-bronze);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.form-input:focus {
+  border-bottom-color: var(--accent-gold);
+}
+
+/* ===== Scrollbar Styling ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-bronze);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: var(--accent-gold);
+  color: var(--bg-dark);
 }
